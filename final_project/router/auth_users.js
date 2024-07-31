@@ -30,31 +30,31 @@ regd_users.post("/login", (req,res) => {
     return res.status(401).json({ message: 'Customer login unsucessful' });
   }
 });
+regd_users.delete("/auth/review/:isbn", (req, res) => {
+  const isbn=req.params.isbn;
+  const {username,password}=req.body;
+  // Check if the book exists in the books object
+  if (!books[isbn]) {
+    return res.status(404).json({ message: 'Book not found' });
+  }
 
-// regd_users.put("/auth/review/:isbn", (req, res) => {
-//   //Write your code here
-//   const isbn=req.params.isbn;
-//   // const { reviewer } = req.query; // Get reviewer from query parameters
-//   const { reviewer,review } = req.query; // Get review from query parameters
-//   // books[isbn].reviews[reviewer]=review;
-  
-//   // return res.json({message:`The review for the book with ISBN ${isbn} has been added/updated`})
-//   if (books[isbn]) {
-//     if (!books[isbn].reviews) {
-//       books[isbn].reviews = {};
-//     }
-//     books[isbn].reviews[reviewer] = review;
-//     return res.status(200).json({ message: `The review for the book with ISBN ${isbn} has been added/updated` });
-//   } else {
-//     return res.status(404).json({ message: 'Book not found' });
-//   }
-// });
+  // Check if the reviews property exists on the book
+  if (!books[isbn].reviews) {
+    return res.status(404).json({ message: 'No reviews found for this book' });
+  }
 
-// regd_users.delete("/delete",(req,res)=>{
-//   const {username,password}=req.body;
-//   users = users.filter(user => user.username !== username);
-//   res.json({message:"Deleted"})
-// })
+  // Check if the review by the specified user exists
+  if (!books[isbn].reviews[username]) {
+    return res.status(404).json({ message: 'No such user exists' });
+  }
+
+
+  delete books[isbn].reviews[username];
+
+ res.status(200).json({ message: `Review for ISBN ${isbn} by user ${username} deleted` });
+
+})
+
 
 module.exports.authenticated = regd_users;
 module.exports.isValid = isValid;

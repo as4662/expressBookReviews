@@ -1,48 +1,4 @@
-// const express = require('express');
-// const jwt = require('jsonwebtoken');
-// const session = require('express-session')
-// const customer_routes = require('./router/auth_users.js').authenticated;
-// const genl_routes = require('./router/general.js').general;
 
-// const app = express();
-
-// app.use(express.json());
-
-// app.use("/customer",session({secret:"fingerprint_customer",resave: true, saveUninitialized: true}))
-
-// app.use("/customer/auth/*", (req, res, next) => {
-//     if (req.session && req.session.user) {
-//         next();
-//     } else {
-//         res.status(401).json({ message: "Unauthorized access" });
-//     }
-// });
- 
-// const PORT =5000;
-
-// app.use("/customer", customer_routes);
-// app.use("/", genl_routes);
-
-// app.put("/auth/review/:isbn", (req, res) => {
-//     //Write your code here
-//     const isbn=req.params.isbn;
-//     // const { reviewer } = req.query; // Get reviewer from query parameters
-//     const { reviewer,review } = req.query; // Get review from query parameters
-//     // books[isbn].reviews[reviewer]=review;
-    
-//     // return res.json({message:`The review for the book with ISBN ${isbn} has been added/updated`})
-//     if (books[isbn]) {
-//       if (!books[isbn].reviews) {
-//         books[isbn].reviews = {};
-//       }
-//       books[isbn].reviews[reviewer] = review;
-//       return res.status(200).json({ message: `The review for the book with ISBN ${isbn} has been added/updated` });
-//     } else {
-//       return res.status(404).json({ message: 'Book not found' });
-//     }
-//   });
-
-// app.listen(PORT,()=>console.log("Server is running"));
 
 const express = require('express');
 const jwt = require('jsonwebtoken');
